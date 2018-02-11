@@ -1,6 +1,7 @@
 trait Currency {
     fn main_currency(&self) -> u64;
     fn sub_currency(&self) -> u64;
+    fn values(&self) -> (u64, u64);
 }
 
 struct Euro {
@@ -14,6 +15,10 @@ impl Currency for Euro {
 
     fn sub_currency(&self) -> u64 {
         return self.amount%100;
+    }
+
+    fn values(&self) -> (u64, u64) {
+        return (self.main_currency(), self.sub_currency());
     }
 }
 
@@ -32,14 +37,17 @@ mod test{
         assert_eq!(e1.amount, 1088);
         assert_eq!(e1.main_currency(), 10);
         assert_eq!(e1.sub_currency(), 88);
+        assert_eq!(e1.values(), (10, 88))
     }
 
 
     #[test]
     fn euro_wraps_cent() {
         let e1 = super::Euro::new(10, 256);
+        assert_eq!(e1.amount, 1088);
         assert_eq!(e1.sub_currency(), 56);
         assert_eq!(e1.main_currency(), 12);
+        assert_eq!(e1.values(), (12, 56))
     }
 }
 
