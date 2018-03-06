@@ -7,7 +7,7 @@ pub mod transaction{
     use chrono::prelude::NaiveDateTime;
     use std::str::FromStr;
 
-    struct Transaction<T: Currency> {
+    pub struct Transaction<T: Currency> {
         id: u64,
         amount: T,
         explanation: String,
@@ -30,11 +30,11 @@ pub mod transaction{
     mod test{
         use super::*;
         #[test]
-        fn transactionCreation() {
+        fn transaction_creation() {
             let e1 = Euro::new(10, 88);
             let dt = DateTime::<Utc>::from_utc(NaiveDateTime::from_timestamp(61, 0), Utc);
             let t = super::Transaction::new(1, e1, "test", dt);
-            assert_eq!(t.amount.main_currency(), 10)
+            assert_eq!(t.amount.main_currency(), 10);
         }
 
     }
