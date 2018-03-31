@@ -1,0 +1,6 @@
+CREATE TABLE budgets (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  planned INTEGER NOT NULL,
+  actual INTEGER DEFAULT 0
+)
