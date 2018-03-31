@@ -8,7 +8,8 @@ pub mod budget{
     use std::str::FromStr;
     use models::transaction::transaction::Transaction;
 
-    struct Budget<T:Currency> {
+    #[derive(Queryable)]
+    pub struct Budget<T:Currency> {
         id: u64,
         name: String,
         planned: T,
